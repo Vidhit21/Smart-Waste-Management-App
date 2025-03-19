@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Jamnagar Smart Waste</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #2E7D32;
+            --secondary-green: #81C784;
+            --accent-orange: #FF8A65;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(46, 125, 50, 0.9), rgba(46, 125, 50, 0.9)),
+                        url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            color: white;
+            padding: 4rem 0;
+            border-radius: 0 0 30px 30px;
+        }
+
+        .feature-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            min-height: 200px;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .status-badge {
+            padding: 0.5em 1em;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        .quick-action-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .recycling-progress {
+            height: 25px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .notification-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-start mb-4">
+            <div>
+                <h1 class="display-5 fw-bold">Welcome, Ramesh! 👋</h1>
+                <p class="lead">Jamnagar Municipal Corporation Area</p>
+            </div>
+            <div class="text-end">
+                <div class="h4 mb-0">🏆 850</div>
+                <small>Recycling Points</small>
+            </div>
+        </div>
+
+        <!-- Status Overview -->
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="d-flex align-items-center p-3 bg-white bg-opacity-10 rounded-3">
+                    <i class="bi bi-trash me-3 fs-2"></i>
+                    <div>
+                        <div class="h5 mb-0">Next Pickup</div>
+                        <div class="h4">Tomorrow 8 AM</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="d-flex align-items-center p-3 bg-white bg-opacity-10 rounded-3">
+                    <i class="bi bi-check-circle me-3 fs-2"></i>
+                    <div>
+                        <div class="h5 mb-0">Last Collection</div>
+                        <div class="h4">Completed</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="d-flex align-items-center p-3 bg-white bg-opacity-10 rounded-3">
+                    <i class="bi bi-recycle me-3 fs-2"></i>
+                    <div>
+                        <div class="h5 mb-0">Recycling Level</div>
+                        <div class="progress recycling-progress">
+                            <div class="progress-bar bg-warning" style="width: 65%">65%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content -->
+<main class="container mt-4">
+    <!-- Quick Actions -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-3 col-6">
+            <div class="card feature-card text-center pt-4 pb-3">
+                <div class="notification-dot bg-danger"></div>
+                <i class="bi bi-calendar-event quick-action-icon text-primary"></i>
+                <div class="card-body">
+                    <h5 class="card-title">Collection Schedule</h5>
+                    <button class="btn btn-outline-primary">View Schedule</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="card feature-card text-center pt-4 pb-3">
+                <i class="bi bi-exclamation-triangle quick-action-icon text-danger"></i>
+                <div class="card-body">
+                    <h5 class="card-title">Report Issue</h5>
+                    <button class="btn btn-outline-danger">File Report</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="card feature-card text-center pt-4 pb-3">
+                <i class="bi bi-truck quick-action-icon text-success"></i>
+                <div class="card-body">
+                    <h5 class="card-title">Bulk Pickup</h5>
+                    <button class="btn btn-outline-success">Request Now</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="card feature-card text-center pt-4 pb-3">
+                <i class="bi bi-coin quick-action-icon text-warning"></i>
+                <div class="card-body">
+                    <h5 class="card-title">Recycling Points</h5>
+                    <button class="btn btn-outline-warning">Redeem</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live Updates Section -->
+    <div class="row g-4">
+        <!-- Ongoing Collections -->
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Live Collection Progress</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <i class="bi bi-geo-alt fs-3 text-success"></i>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6>Your Area Progress</h6>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-success" style="width: 45%"></div>
+                                    </div>
+                                    <small class="text-muted">Updated 15min ago</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <i class="bi bi-map fs-3 text-primary"></i>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6>City-wide Progress</h6>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-primary" style="width: 68%"></div>
+                                    </div>
+                                    <small class="text-muted">Live tracking</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Notifications -->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Recent Alerts</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <div class="d-flex justify-content-between">
+                                <small>Schedule Update</small>
+                                <span class="badge bg-warning">New</span>
+                            </div>
+                            <div>Holiday collection changes</div>
+                            <small class="text-muted">2h ago</small>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <div>Report #489 resolved</div>
+                            <small class="text-muted">Yesterday</small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Animate progress bars on load
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.progress-bar').forEach(bar => {
+            bar.style.transition = 'width 1s ease-in-out';
+            bar.style.width = bar.style.width;
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications | Jamnagar Smart Waste</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .notification-card {
+            border-left: 4px solid transparent;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .notification-card.unread {
+            border-left-color: #2E7D32;
+            background-color: #f8fff8;
+        }
+
+        .notification-badge {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .filter-btn.active {
+            background: #2E7D32 !important;
+            color: white !important;
+        }
+
+        #notificationList {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .notification-card:hover {
+            transform: translateX(5px);
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container py-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold">🔔 Notifications</h2>
+            <p class="text-muted">Recent updates and reminders</p>
+        </div>
+        <div>
+            <button class="btn btn-outline-success" onclick="markAllAsRead()">
+                <i class="bi bi-check-all"></i> Mark All Read
+            </button>
+        </div>
+    </div>
+
+    <!-- Filter Controls -->
+    <div class="d-flex gap-2 mb-4">
+        <button class="btn btn-outline-secondary filter-btn active" 
+                data-filter="all" onclick="filterNotifications('all')">
+            All <span class="badge bg-success">5</span>
+        </button>
+        <button class="btn btn-outline-secondary filter-btn" 
+                data-filter="reminder" onclick="filterNotifications('reminder')">
+            <i class="bi bi-alarm"></i> Reminders
+        </button>
+        <button class="btn btn-outline-secondary filter-btn" 
+                data-filter="alert" onclick="filterNotifications('alert')">
+            <i class="bi bi-exclamation-triangle"></i> Alerts
+        </button>
+        <button class="btn btn-outline-secondary filter-btn" 
+                data-filter="update" onclick="filterNotifications('update')">
+            <i class="bi bi-info-circle"></i> Updates
+        </button>
+    </div>
+
+    <!-- Notifications List -->
+    <div class="card" id="notificationList">
+        <div class="card-body p-0">
+            <!-- Today's Notifications -->
+            <div class="p-3 bg-light border-bottom">
+                <h6 class="mb-0">Today</h6>
+            </div>
+            <div class="notification-group">
+                <!-- Notification Item -->
+                <div class="notification-card unread p-3 border-bottom" 
+                     data-type="reminder" onclick="toggleRead(this)">
+                    <div class="d-flex gap-3 align-items-start">
+                        <div class="notification-icon bg-success text-white">
+                            <i class="bi bi-trash"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="mb-1">Collection Reminder</h6>
+                            <p class="mb-0 text-muted">Organic waste pickup in 2 hours</p>
+                            <small class="text-muted">10:45 AM</small>
+                        </div>
+                    </div>
+                    <div class="notification-badge bg-danger"></div>
+                </div>
+
+                <!-- More notifications -->
+            </div>
+
+            <!-- Earlier Notifications -->
+            <div class="p-3 bg-light border-bottom">
+                <h6 class="mb-0">Earlier This Week</h6>
+            </div>
+            <div class="notification-group">
+                <!-- Notification Item -->
+                <div class="notification-card p-3 border-bottom" 
+                     data-type="update" onclick="toggleRead(this)">
+                    <div class="d-flex gap-3 align-items-start">
+                        <div class="notification-icon bg-primary text-white">
+                            <i class="bi bi-check2-circle"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="mb-1">Report Resolved</h6>
+                            <p class="mb-0 text-muted">Your complaint #4589 has been resolved</p>
+                            <small class="text-muted">Yesterday 3:15 PM</small>
+                        </div>
+                    </div>
+                    <button class="btn btn-sm btn-link text-danger" 
+                            onclick="deleteNotification(event, this)">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="text-center py-5" id="emptyState" style="display: none;">
+        <i class="bi bi-bell fs-1 text-muted"></i>
+        <p class="text-muted mt-3">No notifications to display</p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Notification Management
+    function toggleRead(element) {
+        element.classList.toggle('unread');
+        element.querySelector('.notification-badge').style.display = 'none';
+        updateBadgeCounts();
+    }
+
+    function deleteNotification(event, element) {
+        event.stopPropagation();
+        const card = element.closest('.notification-card');
+        card.style.opacity = '0';
+        setTimeout(() => card.remove(), 300);
+        checkEmptyState();
+    }
+
+    function markAllAsRead() {
+        document.querySelectorAll('.notification-card.unread').forEach(card => {
+            card.classList.remove('unread');
+            card.querySelector('.notification-badge').style.display = 'none';
+        });
+        updateBadgeCounts();
+    }
+
+    // Filtering
+    function filterNotifications(type) {
+        document.querySelectorAll('.filter-btn').forEach(btn => 
+            btn.classList.toggle('active', btn.dataset.filter === type));
+        
+        document.querySelectorAll('.notification-card').forEach(card => {
+            card.style.display = type === 'all' || card.dataset.type === type ? 
+                               'block' : 'none';
+        });
+        
+        checkEmptyState();
+    }
+
+    // Helpers
+    function updateBadgeCounts() {
+        const counts = {
+            all: document.querySelectorAll('.notification-card').length,
+            unread: document.querySelectorAll('.unread').length
+        };
+        document.querySelector('[data-filter="all"] .badge').textContent = counts.all;
+    }
+
+    function checkEmptyState() {
+        const visible = document.querySelectorAll('.notification-card:not([style*="display: none"])').length;
+        document.getElementById('emptyState').style.display = 
+            visible ? 'none' : 'block';
+    }
+
+    // Initial setup
+    document.addEventListener('DOMContentLoaded', () => {
+        updateBadgeCounts();
+        checkEmptyState();
+    });
+</script>
+</body>
+</html>
