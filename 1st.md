@@ -6,14 +6,14 @@ Your **Smart Waste Management App for Jamnagar City** has **four types of users*
 These are the citizens of Jamnagar who will use the app to track waste collection, report issues, and request services.
 
 ### **Pages for Residents:**
-1. **Home Page** – Overview of the app with quick access to main features.  
-2. **Waste Collection Schedule** – View real-time updates on pickup days, timings, and holidays.  
-3. **Report Issues** – Residents can report missed pickups, improper waste disposal, or other complaints.  
-4. **Request Bulk Pickup** – Option to request extra waste collection for large disposals.  
-5. **Incentivized Recycling** – Users earn points for segregating recyclable waste.  
+1. **Home Page** – Overview of the app with quick access to main features.  index.html
+2. **Waste Collection Schedule** – View real-time updates on pickup days, timings, and holidays.  Schedule.html
+3. **Report Issues** – Residents can report missed pickups, improper waste disposal, or other complaints.  report.html
+4. **Request Bulk Pickup** – Option to request extra waste collection for large disposals.  request.html
+5. **Incentivized Recycling** – Users earn points for segregating recyclable waste. reward.html 
 6. **Notifications & Alerts** – Get updates on schedule changes, collection reminders, and feedback status.  
 7. **Profile & Settings** – Manage user details, preferences, and notification settings.  
-
+profile.html/setting.html
 ---
 
 ## **2. Waste Collection Workers**
