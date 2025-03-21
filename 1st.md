@@ -13,7 +13,8 @@ These are the citizens of Jamnagar who will use the app to track waste collectio
 5. **Incentivized Recycling** – Users earn points for segregating recyclable waste. reward.html 
 6. **Notifications & Alerts** – Get updates on schedule changes, collection reminders, and feedback status.  
 7. **Profile & Settings** – Manage user details, preferences, and notification settings.  
-profile.html/setting.html
+8. **Eduction** - Educted the people about how to manage the waste 
+
 ---
 
 ## **2. Waste Collection Workers**

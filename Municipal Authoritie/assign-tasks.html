@@ -48,10 +48,7 @@
         <div class="collapse navbar-collapse" id="municipalNav">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a
-                class="nav-link nav-link-custom"
-                href="dashboard.html"
-              >
+              <a class="nav-link nav-link-custom" href="dashboard.html">
                 <i class="bi bi-speedometer2 me-2"></i>
                 Dashboard
               </a>
@@ -218,90 +215,110 @@
             </div>
           </div>
 
-<!-- Active Tasks List -->
-<div class="col-12 col-lg-8">
-    <article class="card-base tasks-list-card" aria-labelledby="active-tasks-heading">
-      <header class="task-list-header">
-        <h2 id="active-tasks-heading" class="h5 mb-0">
-          <i class="bi bi-list-task me-2" aria-hidden="true"></i>
-          Active Tasks
-        </h2>
-        <p class="text-muted mb-0" aria-live="polite">
-          Showing <span class="visually-hidden">tasks</span> 
-          <span class="badge bg-primary">8</span> of 23
-        </p>
-      </header>
-  
-      <!-- Task List -->
-      <ul class="task-list list-unstyled" role="list">
-        <!-- Task Item -->
-        <li class="task-item" role="listitem" data-priority="urgent" data-status="not-started">
-          <div class="task-priority-indicator" aria-hidden="true"></div>
-          
-          <div class="task-content">
-            <div class="task-header">
-              <h3 class="h6 task-title">
-                <span class="visually-hidden">Priority:</span>
-                Emergency Collection - Market Area
-              </h3>
-              <div class="task-meta">
-                <span class="badge bg-danger">
-                  <i class="bi bi-exclamation-circle me-1" aria-hidden="true"></i>
-                  Urgent
-                </span>
-                <time datetime="2023-12-15T15:00" class="text-muted">
-                  <i class="bi bi-clock me-1" aria-hidden="true"></i>
-                  Due: Today 3 PM
-                </time>
-                <span class="task-id text-muted">#TASK-458</span>
+          <!-- Active Tasks List -->
+          <div class="col-12 col-lg-8">
+            <article
+              class="card-base tasks-list-card"
+              aria-labelledby="active-tasks-heading"
+            >
+              <header class="task-list-header">
+                <h2 id="active-tasks-heading" class="h5 mb-0">
+                  <i class="bi bi-list-task me-2" aria-hidden="true"></i>
+                  Active Tasks
+                </h2>
+                <p class="text-muted mb-0" aria-live="polite">
+                  Showing <span class="visually-hidden">tasks</span>
+                  <span class="badge bg-primary">8</span> of 23
+                </p>
+              </header>
+
+              <!-- Task List -->
+              <ul class="task-list list-unstyled" role="list">
+                <!-- Task Item -->
+                <li
+                  class="task-item"
+                  role="listitem"
+                  data-priority="urgent"
+                  data-status="not-started"
+                >
+                  <div class="task-priority-indicator" aria-hidden="true"></div>
+
+                  <div class="task-content">
+                    <div class="task-header">
+                      <h3 class="h6 task-title">
+                        <span class="visually-hidden">Priority:</span>
+                        Emergency Collection - Market Area
+                      </h3>
+                      <div class="task-meta">
+                        <span class="badge bg-danger">
+                          <i
+                            class="bi bi-exclamation-circle me-1"
+                            aria-hidden="true"
+                          ></i>
+                          Urgent
+                        </span>
+                        <time datetime="2023-12-15T15:00" class="text-muted">
+                          <i class="bi bi-clock me-1" aria-hidden="true"></i>
+                          Due: Today 3 PM
+                        </time>
+                        <span class="task-id text-muted">#TASK-458</span>
+                      </div>
+                    </div>
+
+                    <p class="task-description">
+                      Collect overflowing waste from main market area.
+                      <span class="text-muted">Last updated: 2 hours ago</span>
+                    </p>
+
+                    <footer class="task-footer">
+                      <div class="worker-info">
+                        <img
+                          src="worker-avatar.png"
+                          class="worker-avatar"
+                          alt="Ramesh Patel profile picture"
+                          loading="lazy"
+                          width="40"
+                          height="40"
+                        />
+                        <div>
+                          <span class="worker-name">Ramesh Patel</span>
+                          <span class="worker-zone d-block text-muted"
+                            >Zone 5</span
+                          >
+                        </div>
+                      </div>
+
+                      <div class="task-progress">
+                        <div class="progress-status">
+                          <span class="progress-text">Not Started</span>
+                          <span class="progress-percent">0%</span>
+                        </div>
+                        <div class="progress-track">
+                          <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                      </div>
+                    </footer>
+                  </div>
+                </li>
+
+                <!-- More Task Items -->
+                <li
+                  class="task-item"
+                  role="listitem"
+                  data-priority="high"
+                  data-status="in-progress"
+                >
+                  <!-- Similar structure with appropriate data attributes -->
+                </li>
+              </ul>
+
+              <!-- Empty State -->
+              <div class="task-list-empty text-center py-5 d-none">
+                <i class="bi bi-check2-circle display-5 text-muted mb-3"></i>
+                <p class="text-muted">No active tasks found. Great job!</p>
               </div>
-            </div>
-  
-            <p class="task-description">
-              Collect overflowing waste from main market area. 
-              <span class="text-muted">Last updated: 2 hours ago</span>
-            </p>
-  
-            <footer class="task-footer">
-              <div class="worker-info">
-                <img src="worker-avatar.png" 
-                     class="worker-avatar" 
-                     alt="Ramesh Patel profile picture"
-                     loading="lazy"
-                     width="40"
-                     height="40">
-                <div>
-                  <span class="worker-name">Ramesh Patel</span>
-                  <span class="worker-zone d-block text-muted">Zone 5</span>
-                </div>
-              </div>
-  
-              <div class="task-progress">
-                <div class="progress-status">
-                  <span class="progress-text">Not Started</span>
-                  <span class="progress-percent">0%</span>
-                </div>
-                <div class="progress-track">
-                  <div class="progress-fill" style="width: 0%"></div>
-                </div>
-              </div>
-            </footer>
+            </article>
           </div>
-        </li>
-  
-        <!-- More Task Items -->
-        <li class="task-item" role="listitem" data-priority="high" data-status="in-progress">
-          <!-- Similar structure with appropriate data attributes -->
-        </li>
-      </ul>
-  
-      <!-- Empty State -->
-      <div class="task-list-empty text-center py-5 d-none">
-        <i class="bi bi-check2-circle display-5 text-muted mb-3"></i>
-        <p class="text-muted">No active tasks found. Great job!</p>
-      </div>
-    </article>
-  </div>
         </div>
       </div>
     </div>
