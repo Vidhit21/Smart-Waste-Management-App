@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Municipal Dashboard - Jamnagar Waste Management</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img
+            src="city-logo.png"
+            alt="City Logo"
+            style="height: 40px"
+            class="me-2"
+          />
+          Jamnagar Waste Management
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#municipalNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="municipalNav">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link nav-link-custom active-link"
+                href="admin-dashboard.html"
+              >
+                <i class="bi bi-speedometer2 me-2"></i>
+                Dashboard
+              </a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link nav-link-custom dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                <i class="bi bi-gear-wide-connected me-2"></i>
+                Operations
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="assign-tasks.html">
+                    <i class="bi bi-person-plus me-2"></i>Assign Tasks
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="track-collection.html">
+                    <i class="bi bi-geo-alt me-2"></i>Track Collection
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="optimize-routes.html">
+                    <i class="bi bi-signpost-split me-2"></i>Optimize Routes
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link nav-link-custom" href="analytics.html">
+                <i class="bi bi-bar-chart-line me-2"></i>
+                Analytics
+                <span class="badge rounded-pill bg-danger badge-notification"
+                  >3</span
+                >
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link nav-link-custom" href="system-settings.html">
+                <i class="bi bi-sliders me-2"></i>
+                Settings
+              </a>
+            </li>
+          </ul>
+
+          <!-- Right Side -->
+          <div class="ms-3 d-flex align-items-center">
+            <div class="dropdown">
+              <a
+                class="profile-icon dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                <i class="bi bi-person-fill"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><h6 class="dropdown-header">Municipal Admin</h6></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#">
+                    <i class="bi bi-person-circle me-2"></i>Profile
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">
+                    <i class="bi bi-box-arrow-right me-2"></i>Logout
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <div class="container-fluid">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h3 class="fw-bold text-primary">Municipal Dashboard</h3>
+          <div class="text-muted">Last Updated: 15 mins ago</div>
+        </div>
+
+        <!-- Stats Cards Section -->
+        <div class="row g-4">
+          <!-- Waste Collected Card -->
+          <div class="col-12 col-md-6 col-xl-3">
+            <div class="stats-card">
+              <div class="card-header">
+                <div class="icon-container bg-primary">
+                  <i class="bi bi-trash3"></i>
+                </div>
+                <div class="trend-indicator positive">
+                  <i class="bi bi-arrow-up-short"></i> 12%
+                </div>
+              </div>
+              <div class="card-content">
+                <h3>12.5<span>T</span></h3>
+                <p>Waste Collected Today</p>
+                <div class="progress">
+                  <div class="progress-bar" style="width: 85%"></div>
+                </div>
+                <div class="comparison-text">
+                  <small>vs 11.2T yesterday</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pending Tasks Card -->
+          <div class="col-12 col-md-6 col-xl-3">
+            <div class="stats-card">
+              <div class="card-header">
+                <div class="icon-container bg-warning">
+                  <i class="bi bi-exclamation-octagon"></i>
+                </div>
+                <div class="badge urgent">URGENT</div>
+              </div>
+              <div class="card-content">
+                <h3>23</h3>
+                <p>Pending Tasks</p>
+                <div class="task-breakdown">
+                  <div class="task-type">
+                    <span class="dot"></span>
+                    <small>8 High Priority</small>
+                  </div>
+                  <div class="task-type">
+                    <span class="dot"></span>
+                    <small>15 Regular</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reports Resolved Card -->
+          <div class="col-12 col-md-6 col-xl-3">
+            <div class="stats-card">
+              <div class="card-header">
+                <div class="icon-container bg-success">
+                  <i class="bi bi-check2-circle"></i>
+                </div>
+                <div class="trend-indicator positive">
+                  <i class="bi bi-graph-up-arrow"></i>
+                </div>
+              </div>
+              <div class="card-content">
+                <h3>154</h3>
+                <p>Reports Resolved</p>
+                <div class="resolution-rate">
+                  <div class="rate-progress">
+                    <div class="fill" style="width: 78%"></div>
+                  </div>
+                  <small>78% Resolution Rate</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Collection Efficiency Card -->
+          <div class="col-12 col-md-6 col-xl-3">
+            <div class="stats-card">
+              <div class="card-header">
+                <div class="icon-container bg-info">
+                  <i class="bi bi-speedometer2"></i>
+                </div>
+                <div class="efficiency-meter">
+                  <div class="gauge" data-value="82">
+                    <div class="percentage">82%</div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-content">
+                <h3>82<span>%</span></h3>
+                <p>Collection Efficiency</p>
+                <div class="performance-status">
+                  <i class="bi bi-star-fill"></i>
+                  <small>Excellent Performance</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="row g-4 mt-4">
+          <div class="col-12 col-lg-8">
+            <div class="advanced-chart-container">
+              <!-- Chart Header -->
+              <div class="chart-header">
+                <div class="chart-title-group">
+                  <h4 class="chart-title">Waste Collection Analytics</h4>
+                  <p class="chart-subtitle">
+                    Weekly Collection Trends & Projections
+                  </p>
+                </div>
+                <div class="chart-controls">
+                  <div class="btn-group chart-filter">
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-time active"
+                      data-period="week"
+                    >
+                      7D
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-time"
+                      data-period="month"
+                    >
+                      30D
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-time"
+                      data-period="quarter"
+                    >
+                      90D
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Chart Metrics Summary -->
+              <div class="chart-metrics">
+                <div class="metric-item">
+                  <span class="metric-label">Current Volume</span>
+                  <span class="metric-value"
+                    >12.5T
+                    <span class="metric-change positive">↑12%</span></span
+                  >
+                </div>
+                <div class="metric-item">
+                  <span class="metric-label">Avg. Daily</span>
+                  <span class="metric-value">9.8T</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-label">Peak Day</span>
+                  <span class="metric-value"
+                    >Thu <span class="metric-highlight">14.2T</span></span
+                  >
+                </div>
+              </div>
+
+              <!-- Chart Canvas -->
+              <div class="chart-wrapper">
+                <canvas id="collectionChart"></canvas>
+              </div>
+
+              <!-- Chart Footer -->
+              <div class="chart-footer">
+                <div class="chart-legend">
+                  <div class="legend-item">
+                    <span class="legend-color primary"></span>
+                    Actual Collection
+                  </div>
+                  <div class="legend-item">
+                    <span class="legend-color projected"></span>
+                    Projected Trend
+                  </div>
+                </div>
+                <div class="chart-source">
+                  <i class="bi bi-info-circle"></i> Data updated 15 minutes ago
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Recent Activities Section -->
+          <div class="col-12 col-lg-4">
+            <div class="activity-feed">
+              <!-- Header with Filter -->
+              <div
+                class="feed-header d-flex justify-content-between align-items-center mb-4"
+              >
+                <h4 class="feed-title">Activity Feed</h4>
+                <div class="feed-filter">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-filter active">
+                      All
+                    </button>
+                    <button type="button" class="btn btn-sm btn-filter">
+                      Alerts
+                    </button>
+                    <button type="button" class="btn btn-sm btn-filter">
+                      Tasks
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Activity Timeline -->
+              <div class="activity-timeline">
+                <!-- Activity Item -->
+                <div class="activity-item collection-completed">
+                  <div class="activity-icon">
+                    <i class="bi bi-truck"></i>
+                  </div>
+                  <div class="activity-content">
+                    <div class="activity-header">
+                      <span class="activity-time">15 mins ago</span>
+                      <span class="activity-badge completed">Completed</span>
+                    </div>
+                    <h6 class="activity-title">Zone 5 Collection Update</h6>
+                    <p class="activity-details">
+                      Vehicle #458 collected 2.4T waste
+                      <span class="activity-meta">
+                        <i class="bi bi-clock-history"></i> 18 mins early
+                      </span>
+                    </p>
+                    <div class="activity-progress">
+                      <div class="progress-text">Route Completion</div>
+                      <div class="progress-bar" style="width: 92%"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Activity Item -->
+                <div class="activity-item report-resolved">
+                  <div class="activity-icon">
+                    <i class="bi bi-check2-circle"></i>
+                  </div>
+                  <div class="activity-content">
+                    <div class="activity-header">
+                      <span class="activity-time">2 hrs ago</span>
+                      <span class="activity-badge resolved">Resolved</span>
+                    </div>
+                    <h6 class="activity-title">Report #489 Closed</h6>
+                    <p class="activity-details">
+                      Illegal dumping case resolved in Sector 7B
+                      <span class="activity-meta">
+                        <i class="bi bi-person-check"></i> Verified by Inspector
+                      </span>
+                    </p>
+                    <div class="activity-stats">
+                      <div class="stat-item">
+                        <i class="bi bi-calendar-check"></i>
+                        3 days resolution time
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Activity Item -->
+                <div class="activity-item new-alert">
+                  <div class="activity-icon">
+                    <i class="bi bi-exclamation-octagon"></i>
+                  </div>
+                  <div class="activity-content">
+                    <div class="activity-header">
+                      <span class="activity-time">4 hrs ago</span>
+                      <span class="activity-badge urgent">Urgent</span>
+                    </div>
+                    <h6 class="activity-title">New Complaint Received</h6>
+                    <p class="activity-details">
+                      Overflowing bins reported in Zone 2
+                      <span class="activity-meta">
+                        <i class="bi bi-geo-alt"></i> Near City Market
+                      </span>
+                    </p>
+                    <div class="activity-actions">
+                      <button class="btn btn-action">
+                        <i class="bi bi-eye"></i> View Details
+                      </button>
+                      <button class="btn btn-action">
+                        <i class="bi bi-check2"></i> Acknowledge
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Timeline Connector -->
+              <div class="timeline-connector"></div>
+
+              <!-- View All Link -->
+              <div class="text-end mt-3">
+                <a href="#" class="view-all-link">
+                  View All Activities
+                  <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions & Live Tracking Section -->
+        <div class="row g-4 mt-4">
+          <!-- Enhanced Quick Actions -->
+          <div class="col-12 col-lg-4">
+            <div class="quick-actions-panel">
+              <div
+                class="panel-header d-flex justify-content-between align-items-center mb-4"
+              >
+                <h4 class="panel-title">Quick Actions</h4>
+                <i class="bi bi-lightning-charge fs-5 text-primary"></i>
+              </div>
+
+              <div class="action-grid">
+                <!-- Assign Task Card -->
+                <div class="action-card assign-task">
+                  <div class="card-icon">
+                    <i class="bi bi-person-add"></i>
+                  </div>
+                  <div class="card-content">
+                    <h5>Assign Task</h5>
+                    <p>Create new collection assignments</p>
+                    <div class="action-progress">
+                      <span>3 pending requests</span>
+                      <div class="progress-bar" style="width: 60%"></div>
+                    </div>
+                  </div>
+                  <button class="action-button">Assign Now</button>
+                </div>
+
+                <!-- Generate Report Card -->
+                <div class="action-card generate-report">
+                  <div class="card-icon">
+                    <i class="bi bi-file-bar-graph"></i>
+                  </div>
+                  <div class="card-content">
+                    <h5>Generate Report</h5>
+                    <p>Daily performance analytics</p>
+                    <div class="action-meta">
+                      <span class="badge completed">Last report: 2h ago</span>
+                    </div>
+                  </div>
+                  <button class="action-button">Create Report</button>
+                </div>
+
+                <!-- Optimize Routes Card -->
+                <div class="action-card optimize-routes">
+                  <div class="card-icon">
+                    <i class="bi bi-signpost-split"></i>
+                  </div>
+                  <div class="card-content">
+                    <h5>Optimize Routes</h5>
+                    <p>AI-powered route optimization</p>
+                    <div class="action-meta">
+                      <span class="badge warning">Potential savings: 17%</span>
+                    </div>
+                  </div>
+                  <button class="action-button">Optimize Now</button>
+                </div>
+
+                <!-- View Alerts Card -->
+                <div class="action-card view-alerts">
+                  <div class="card-icon">
+                    <i class="bi bi-bell"></i>
+                  </div>
+                  <div class="card-content">
+                    <h5>System Alerts</h5>
+                    <p>Active notifications & warnings</p>
+                    <div class="action-meta">
+                      <span class="badge danger">3 urgent alerts</span>
+                    </div>
+                  </div>
+                  <button class="action-button">View Alerts</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Enhanced Live Tracking Map -->
+          <div class="col-12 col-lg-8">
+            <div class="live-tracking-container">
+              <div
+                class="map-header d-flex justify-content-between align-items-center p-3"
+              >
+                <h5 class="map-title mb-0">Live Collection Tracking</h5>
+                <div class="map-stats">
+                  <span class="stat-item">
+                    <i class="bi bi-truck"></i> 12 Active
+                  </span>
+                  <span class="stat-item">
+                    <i class="bi bi-check-circle"></i> 38 Completed
+                  </span>
+                </div>
+              </div>
+
+              <div class="map-wrapper">
+                <!-- Interactive Map Placeholder -->
+                <div class="advanced-map-placeholder">
+                  <!-- Map Overlay Elements -->
+                  <div
+                    class="map-vehicle"
+                    role="img"
+                    aria-label="Collection vehicle #458"
+                    style="top: 30%; left: 25%"
+                  >
+                    <i class="bi bi-truck"></i>
+                    <div class="vehicle-info">#458 • 2.4T</div>
+                  </div>
+                  <div class="map-route" style="top: 35%; left: 20%"></div>
+                  <div class="map-zone" style="top: 40%; left: 30%">Zone 5</div>
+
+                  <!-- Map Legend -->
+                  <div class="map-legend">
+                    <div class="legend-item">
+                      <i class="bi bi-truck"></i> Collection Vehicle
+                    </div>
+                    <div class="legend-item">
+                      <i class="bi bi-geo-alt"></i> Active Zone
+                    </div>
+                  </div>
+
+                  <!-- Zoom Controls -->
+                  <div class="map-controls">
+                    <button class="control-btn" aria-label="Zoom in">
+                      <i class="bi bi-plus"></i>
+                    </button>
+                    <button class="control-btn">
+                      <i class="bi bi-dash"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Enhanced Chart Configuration
+      const ctx = document.getElementById("collectionChart").getContext("2d");
+
+      // Gradient Fill
+      const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+      gradient.addColorStop(0, "rgba(59, 130, 246, 0.2)");
+      gradient.addColorStop(1, "rgba(59, 130, 246, 0)");
+
+      // Wrap chart init in try-catch
+      try {
+        new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+            datasets: [
+              {
+                label: "Actual Collection",
+                data: [8.2, 9.1, 10.5, 14.2, 11.8, 7.5, 6.9],
+                borderColor: "#3b82f6",
+                borderWidth: 2,
+                tension: 0.4,
+                fill: true,
+                backgroundColor: gradient,
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                pointBackgroundColor: "#fff",
+                pointBorderColor: "#3b82f6",
+              },
+              {
+                label: "Projected Trend",
+                data: [7.8, 8.9, 10.1, 11.3, 10.8, 8.2, 7.5],
+                borderColor: "#c7d2fe",
+                borderWidth: 2,
+                borderDash: [5, 5],
+                tension: 0.4,
+                pointRadius: 0,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                backgroundColor: "#1f2937",
+                titleColor: "#fff",
+                bodyColor: "#fff",
+                borderColor: "#3b82f6",
+                borderWidth: 1,
+                padding: 12,
+                usePointStyle: true,
+              },
+            },
+            interaction: {
+              mode: "nearest",
+              intersect: false,
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                grid: { color: "#f1f5f9" },
+                ticks: {
+                  color: "#6b7280",
+                  callback: function (value) {
+                    return value + "T";
+                  },
+                },
+              },
+              x: {
+                grid: { display: false },
+                ticks: { color: "#6b7280" },
+              },
+            },
+          },
+        });
+      } catch (error) {
+        console.error("Chart initialization failed:", error);
+        document.getElementById("collectionChart").innerHTML =
+          '<p class="chart-error">Data unavailable</p>';
+      }
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
