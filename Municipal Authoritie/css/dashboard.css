@@ -1,9 +1,56 @@
 :root {
-  --primary-color: #2563eb; /* More vibrant blue */
-  --secondary-color: #10b981; /* Fresh green */
-  --accent-color: #f59e0b; /* Warm amber */
-  --light-bg: #f8fafc; /* Cool light background */
-  --text-primary: #1e293b; /* Dark slate for text */
+  /* Primary Colors */
+  --color-primary-500: #3b82f6;
+  --color-primary-100: #dbeafe;
+
+  /* Status Colors */
+  --color-success-500: #10b981;
+  --color-success-100: #d1fae5;
+
+  /* Add all other colors similarly */
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  /* Transitions */
+  --transition-default: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --z-index-base: 1;
+  --z-index-map: 10;
+  --z-index-nav: 100;
+}
+
+/* Contrast fixes */
+.activity-badge.urgent {
+  background: #fee2e2;
+  color: #b91c1c; /* Darker red for better contrast */
+}
+
+.metric-change.positive {
+  color: #059669; /* Darker green */
+}
+
+/* Add consistent icon sizing */
+.bi {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+}
+
+/* Fix percentage gauge positioning */
+.percentage {
+  transform: translate(-50%, -50%); /* Center vertically */
+}
+
+/* Mobile overflow prevention */
+@media (max-width: 576px) {
+  .chart-metrics {
+    grid-template-columns: 1fr;
+  }
+  
+  .activity-actions {
+    flex-direction: column;
+  }
 }
 
 .main-content {
@@ -28,6 +75,15 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
+.stats-card,
+.activity-item {
+  will-change: transform; /* Hint browsers for smoother animations */
+  backface-visibility: hidden;
+}
+
+.progress-bar {
+  transform: translateZ(0); /* GPU acceleration */
+}
 .card-header {
   display: flex;
   justify-content: space-between;
@@ -43,13 +99,25 @@
   align-items: center;
   justify-content: center;
   font-size: 1.8rem;
-  background: linear-gradient(135deg, currentColor 0%, rgba(0,0,0,0.1) 100%);
+  background: linear-gradient(135deg, currentColor 0%, rgba(0, 0, 0, 0.1) 100%);
 }
 
-.bg-primary { background-color: #3B82F6; color: #fff; }
-.bg-warning { background-color: #F59E0B; color: #fff; }
-.bg-success { background-color: #10B981; color: #fff; }
-.bg-info { background-color: #06B6D4; color: #fff; }
+.bg-primary {
+  background-color: #3b82f6;
+  color: #fff;
+}
+.bg-warning {
+  background-color: #f59e0b;
+  color: #fff;
+}
+.bg-success {
+  background-color: #10b981;
+  color: #fff;
+}
+.bg-info {
+  background-color: #06b6d4;
+  color: #fff;
+}
 
 .trend-indicator {
   font-size: 0.9rem;
@@ -62,13 +130,13 @@
 }
 
 .trend-indicator.positive {
-  background: #D1FAE5;
+  background: #d1fae5;
   color: #059669;
 }
 
 .badge.urgent {
-  background: #FEE2E2;
-  color: #DC2626;
+  background: #fee2e2;
+  color: #dc2626;
   padding: 4px 10px;
   border-radius: 20px;
   font-size: 0.8rem;
@@ -78,35 +146,35 @@
 .card-content h3 {
   font-size: 2.2rem;
   margin-bottom: 0.5rem;
-  color: #1F2937;
+  color: #1f2937;
   font-weight: 700;
 }
 
 .card-content h3 span {
   font-size: 1.2rem;
-  color: #6B7280;
+  color: #6b7280;
   margin-left: 4px;
 }
 
 .card-content p {
-  color: #6B7280;
+  color: #6b7280;
   margin-bottom: 1.5rem;
 }
 
 .progress {
   height: 8px;
-  background-color: #F3F4F6;
+  background-color: #f3f4f6;
   border-radius: 4px;
   overflow: hidden;
 }
 
 .progress-bar {
-  background-color: #3B82F6;
+  background-color: #3b82f6;
   transition: width 0.5s ease;
 }
 
 .comparison-text small {
-  color: #6B7280;
+  color: #6b7280;
   font-size: 0.85rem;
 }
 
@@ -126,7 +194,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #3B82F6;
+  background: #3b82f6;
 }
 
 .efficiency-meter {
@@ -142,12 +210,12 @@
 }
 
 .gauge::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  border: 4px solid #E5E7EB;
+  border: 4px solid #e5e7eb;
   clip-path: inset(0 0 50% 0);
 }
 
@@ -157,14 +225,14 @@
   left: 50%;
   transform: translate(-50%, -30%);
   font-weight: 600;
-  color: #1F2937;
+  color: #1f2937;
 }
 
 .performance-status {
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #F59E0B;
+  color: #f59e0b;
   margin-top: 1rem;
 }
 
@@ -265,6 +333,15 @@
   height: 300px;
 }
 
+@media (min-width: 768px) {
+  .chart-wrapper {
+    height: 400px; /* Larger height only on desktop */
+  }
+
+  .activity-timeline {
+    padding-left: 2.5rem;
+  }
+}
 .chart-footer {
   display: flex;
   justify-content: space-between;
@@ -305,7 +382,6 @@
   color: #94a3b8;
   font-size: 0.8rem;
 }
-
 
 /* Recent Activities */
 .activity-feed {
@@ -366,9 +442,15 @@
   color: white;
 }
 
-.collection-completed .activity-icon { background: #3b82f6; }
-.report-resolved .activity-icon { background: #10b981; }
-.new-alert .activity-icon { background: #ef4444; }
+.collection-completed .activity-icon {
+  background: #3b82f6;
+}
+.report-resolved .activity-icon {
+  background: #10b981;
+}
+.new-alert .activity-icon {
+  background: #ef4444;
+}
 
 .activity-header {
   display: flex;
@@ -389,9 +471,18 @@
   font-weight: 500;
 }
 
-.completed { background: #d1fae5; color: #059669; }
-.resolved { background: #dbeafe; color: #1d4ed8; }
-.urgent { background: #fee2e2; color: #dc2626; }
+.completed {
+  background: #d1fae5;
+  color: #059669;
+}
+.resolved {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+.urgent {
+  background: #fee2e2;
+  color: #dc2626;
+}
 
 .activity-title {
   font-size: 0.95rem;
@@ -433,7 +524,7 @@
 }
 
 .progress-bar::after {
-  content: '';
+  content: "";
   display: block;
   height: 100%;
   background: #3b82f6;
@@ -453,6 +544,17 @@
   border: 1px solid #e5e7eb;
   border-radius: 6px;
   transition: all 0.2s ease;
+}
+
+.btn-action {
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-500);
+    outline-offset: 2px;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
 }
 
 .btn-action:hover {
@@ -522,10 +624,22 @@
   margin-bottom: 1rem;
 }
 
-.assign-task .card-icon { background: #dbeafe; color: #1d4ed8; }
-.generate-report .card-icon { background: #dcfce7; color: #15803d; }
-.optimize-routes .card-icon { background: #fef9c3; color: #a16207; }
-.view-alerts .card-icon { background: #fee2e2; color: #b91c1c; }
+.assign-task .card-icon {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+.generate-report .card-icon {
+  background: #dcfce7;
+  color: #15803d;
+}
+.optimize-routes .card-icon {
+  background: #fef9c3;
+  color: #a16207;
+}
+.view-alerts .card-icon {
+  background: #fee2e2;
+  color: #b91c1c;
+}
 
 .action-card h5 {
   font-size: 1.1rem;
@@ -619,6 +733,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  z-index: var(--z-index-map);
 }
 
 .control-btn {
@@ -657,6 +772,13 @@
 
   .quick-action-btn {
     font-size: 0.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
   }
 }
 
