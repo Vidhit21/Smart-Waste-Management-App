@@ -1,0 +1,77 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0" version="26.1.1">
+  <diagram name="Class Diagram" id="0">
+    <mxGraphModel dx="1489" dy="826" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="classUser" value="User&#xa;——————————————&#xa;PK user_id&#xa;name&#xa;email&#xa;phone&#xa;password&#xa;user_type&#xa;address_id&#xa;created_at&#xa;updated_at" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;" parent="1" vertex="1">
+          <mxGeometry x="650" y="230" width="200" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="classAddress" value="Address&#xa;——————————————&#xa;PK address_id&#xa;division&#xa;street&#xa;pincode&#xa;latitude&#xa;longitude" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;" parent="1" vertex="1">
+          <mxGeometry x="650" y="490" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="classTask" value="Task&#xa;——————————————&#xa;PK task_id&#xa;FK collector_id&#xa;FK location_id&#xa;task_date&#xa;status&#xa;assigned_at&#xa;completed_at" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;" parent="1" vertex="1">
+          <mxGeometry x="320" y="80" width="200" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="classSchedule" value="Schedule&#xa;——————————————&#xa;PK schedule_id&#xa;FK location_id&#xa;collection_day&#xa;time_slot" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" parent="1" vertex="1">
+          <mxGeometry x="650" y="670" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="classReport" value="Report&#xa;——————————————&#xa;PK report_id&#xa;FK user_id&#xa;issue_type&#xa;description&#xa;status&#xa;created_at" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;" parent="1" vertex="1">
+          <mxGeometry x="650" y="30" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="classFeedback" value="Feedback&#xa;——————————————&#xa;PK feedback_id&#xa;FK user_id&#xa;rating&#xa;comments&#xa;created_at" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;" parent="1" vertex="1">
+          <mxGeometry x="1020" y="40" width="200" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="classReward" value="Reward&#xa;——————————————&#xa;PK reward_id&#xa;FK user_id&#xa;points&#xa;earned_date&#xa;redeemed" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;" parent="1" vertex="1">
+          <mxGeometry x="1020" y="420" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="classWasteData" value="Waste Data&#xa;——————————————&#xa;PK waste_id&#xa;FK location_id&#xa;date&#xa;waste_type&#xa;weight_kg" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;" parent="1" vertex="1">
+          <mxGeometry x="320" y="500" width="200" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="classRoute" value="Waste Collection Route&#xa;——————————————&#xa;PK route_id&#xa;FK collector_id&#xa;location_ids&#xa;optimized_at" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" parent="1" vertex="1">
+          <mxGeometry x="320" y="370" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="edge1" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeColor=#000000;" parent="1" source="classUser" target="classAddress" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="220" y="80" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge2" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeColor=#000000;" parent="1" source="classUser" target="classTask" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="120" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge3" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeColor=#000000;" parent="1" source="classUser" target="classReport" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="220" y="60" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge4" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeColor=#000000;" parent="1" source="classUser" target="classFeedback" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="220" y="100" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge5" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeColor=#000000;" parent="1" source="classUser" target="classReward" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="220" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge6" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeColor=#000000;" parent="1" source="classAddress" target="classSchedule" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="300" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge7" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeColor=#000000;" parent="1" source="classAddress" target="classWasteData" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="300" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge8" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeColor=#000000;" parent="1" source="classUser" target="classRoute" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="220" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

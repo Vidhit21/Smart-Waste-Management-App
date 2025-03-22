@@ -1,0 +1,161 @@
+Database design: - 
+	tables: -
+		User 
+		task
+		schedule
+		address/location/division 
+		report
+		feedback
+		reward
+		waste-data
+		waste-collection-route
+		
+		
+
+Here's a **complete database design** for your **Smart Waste Management App for Jamnagar City**, including **table names, column names, and relationships**.
+
+---
+
+## **1. User Table**
+Stores information about all users (Residents, Waste Collectors, Municipal Authorities, and Environmental Agencies).  
+
+| Column Name     | Data Type     | Description |
+|----------------|--------------|-------------|
+| user_id        | INT (PK, AI)  | Unique ID for each user |
+| name           | VARCHAR(255)  | Full name of the user |
+| email          | VARCHAR(255)  | User’s email (unique) |
+| phone          | VARCHAR(15)   | Contact number |
+| password       | VARCHAR(255)  | Hashed password |
+| user_type      | ENUM('Resident', 'Collector', 'Authority', 'Agency') | Type of user |
+| address_id     | INT (FK)      | Links to address/location table |
+| created_at     | TIMESTAMP     | Account creation timestamp |
+| updated_at     | TIMESTAMP     | Last profile update |
+
+---
+
+## **2. Address/Location/Division Table**
+Stores location details for users, waste collection points, and city divisions.  
+
+| Column Name   | Data Type    | Description |
+|--------------|-------------|-------------|
+| address_id   | INT (PK, AI) | Unique ID for each address |
+| user_id      | INT (FK)     | Links to User Table |
+| division     | VARCHAR(100) | City division/ward |
+| street       | VARCHAR(255) | Street name |
+| pincode      | VARCHAR(10)  | Postal code |
+| latitude     | DECIMAL(10,8) | Latitude for map integration |
+| longitude    | DECIMAL(11,8) | Longitude for map integration |
+
+---
+
+## **3. Task Table**
+Stores waste collection tasks assigned to collectors.  
+
+| Column Name  | Data Type     | Description |
+|-------------|--------------|-------------|
+| task_id     | INT (PK, AI)  | Unique ID for each task |
+| collector_id| INT (FK)      | Links to User (waste collector) |
+| location_id | INT (FK)      | Links to Address/Location Table |
+| task_date   | DATE          | Task scheduled date |
+| status      | ENUM('Pending', 'In Progress', 'Completed', 'Missed') | Task status |
+| assigned_at | TIMESTAMP     | Task assignment time |
+| completed_at| TIMESTAMP NULL | Task completion timestamp |
+
+---
+
+## **4. Schedule Table**
+Stores the scheduled waste collection days for different locations.
+
+| Column Name    | Data Type     | Description |
+|---------------|--------------|-------------|
+| schedule_id   | INT (PK, AI)  | Unique ID for each schedule |
+| location_id   | INT (FK)      | Links to Address Table |
+| collection_day| ENUM('Monday', 'Tuesday', ..., 'Sunday') | Scheduled collection day |
+| time_slot     | TIME          | Collection start time |
+
+---
+
+## **5. Report Table**
+Stores reports filed by residents regarding missed pickups or issues.
+
+| Column Name   | Data Type     | Description |
+|--------------|--------------|-------------|
+| report_id    | INT (PK, AI)  | Unique ID for each report |
+| user_id      | INT (FK)      | Links to User Table |
+| issue_type   | VARCHAR(255)  | Type of issue (e.g., missed pickup, delayed service) |
+| description  | TEXT          | Detailed issue description |
+| status       | ENUM('Pending', 'Resolved', 'Rejected') | Report status |
+| created_at   | TIMESTAMP     | Time when report was created |
+
+---
+
+## **6. Feedback Table**
+Stores user feedback on waste collection services.
+
+| Column Name  | Data Type     | Description |
+|-------------|--------------|-------------|
+| feedback_id | INT (PK, AI)  | Unique ID for feedback |
+| user_id     | INT (FK)      | Links to User Table |
+| rating      | INT           | Rating (1-5 stars) |
+| comments    | TEXT          | User’s feedback text |
+| created_at  | TIMESTAMP     | Timestamp of feedback submission |
+
+---
+
+## **7. Reward Table**
+Tracks incentives for residents participating in waste segregation.
+
+| Column Name  | Data Type     | Description |
+|-------------|--------------|-------------|
+| reward_id   | INT (PK, AI)  | Unique ID for reward |
+| user_id     | INT (FK)      | Links to User Table |
+| points      | INT           | Earned reward points |
+| redeemed    | BOOLEAN       | Whether the points were used |
+
+---
+
+## **8. Waste Data Table**
+Stores data on the amount and type of waste collected.
+
+| Column Name  | Data Type     | Description |
+|-------------|--------------|-------------|
+| waste_id    | INT (PK, AI)  | Unique waste entry ID |
+| location_id | INT (FK)      | Links to Address Table |
+| date        | DATE          | Date of waste collection |
+| waste_type  | ENUM('Organic', 'Plastic', 'Glass', 'E-Waste', 'General') | Waste category |
+| weight_kg   | DECIMAL(5,2)  | Weight of collected waste (kg) |
+
+---
+
+## **9. Waste Collection Route Table**
+Stores optimized routes for collectors.
+
+| Column Name   | Data Type     | Description |
+|--------------|--------------|-------------|
+| route_id     | INT (PK, AI)  | Unique route ID |
+| collector_id | INT (FK)      | Links to User Table |
+| location_ids | TEXT          | JSON array of locations in the route |
+| optimized_at | TIMESTAMP     | Timestamp of last route optimization |
+
+---
+
+## **Relationships Between Tables**
+1. **User ↔ Address** (One-to-One) → A user has one address.
+2. **User ↔ Task** (One-to-Many) → A collector can have multiple assigned tasks.
+3. **User ↔ Report** (One-to-Many) → Residents can report multiple issues.
+4. **User ↔ Feedback** (One-to-Many) → Residents can submit multiple feedback entries.
+5. **User ↔ Reward** (One-to-Many) → Residents can earn multiple rewards.
+6. **Location ↔ Schedule** (One-to-Many) → One location can have multiple scheduled pickups.
+7. **Location ↔ Waste Data** (One-to-Many) → Multiple waste data entries per location.
+8. **Collector ↔ Waste Collection Route** (One-to-One) → Each collector has an optimized route.
+
+---
+
+### **How This Database Design Works**
+1. **Residents use the app** to check schedules, report issues, and provide feedback.
+2. **Municipal authorities assign tasks** to collectors and optimize collection routes.
+3. **Waste collectors receive tasks** and update collection status in real-time.
+4. **Collected waste data is stored** for analysis and reporting.
+5. **Rewards are given** to residents for participating in waste segregation.
+
+---
