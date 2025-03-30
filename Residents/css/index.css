@@ -1,0 +1,133 @@
+/* Global Resets & Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  color: #333;
+  padding-top: 70px;
+}
+
+/* Gradient background animation */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Container */
+.container {
+  padding: 20px;
+}
+
+/* Welcome Card – animated with 3D transform */
+.welcome-card {
+  background: linear-gradient(90deg, #ff6f61, #ff9472);
+  color: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transform: perspective(500px) translateZ(0);
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.welcome-card:hover {
+  transform: perspective(500px) translateZ(20px);
+}
+.welcome-card h1 {
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+}
+.welcome-card p {
+  font-size: 0.95rem;
+}
+
+/* Dashboard Cards – colorful and interactive with 3D tilt */
+.dashboard-card {
+  background: #fff;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+.dashboard-card:hover {
+  transform: perspective(600px) rotateX(2deg) rotateY(2deg) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+.card-icon {
+  font-size: 2.5rem;
+  color: #ff6f61;
+  margin-right: 10px;
+}
+.card-title {
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Notification Items – animated entry */
+.notification-item {
+  border-bottom: 1px solid #eee;
+  padding: 12px 0;
+  animation: slideIn 0.5s ease forwards;
+}
+.notification-item:last-child {
+  border-bottom: none;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Quick Links – styled as vibrant app buttons */
+.quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.quick-links a {
+  flex: 1;
+  text-align: center;
+  padding: 12px;
+  border: 2px solid #ff6f61;
+  border-radius: 10px;
+  color: #ff6f61;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s, color 0.3s, transform 0.2s;
+}
+.quick-links a:hover {
+  background: #ff6f61;
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+/* Footer – clean, app-style fixed footer */
+footer {
+  padding: 15px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.95);
+  border-top: 1px solid #eee;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+  .welcome-card {
+    flex-direction: column;
+    text-align: center;
+  }
+}

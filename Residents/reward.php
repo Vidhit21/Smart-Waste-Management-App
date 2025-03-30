@@ -64,33 +64,8 @@
     </style>
 </head>
 <body>
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="index.html">
-            <i class="bi bi-trash"></i> Jamnagar Waste Mgmt
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html"><i class="bi bi-house"></i> Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Schedule.html"><i class="bi bi-calendar-event"></i> Schedule</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="report.html"><i class="bi bi-exclamation-triangle"></i> Report</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="pro_set.html"><i class="bi bi-person"></i> Profile</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+  <!-- Navbar -->
+  <?php include 'nav.php'; ?>
 <div class="container py-4">
     <!-- Points Header -->
     <div class="d-flex justify-content-between align-items-center mb-4">
