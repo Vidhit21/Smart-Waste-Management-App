@@ -1,3 +1,9 @@
+<?php
+if(session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+$activePage = basename($_SERVER['PHP_SELF'], ".php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,70 +16,37 @@
   <!-- Custom CSS -->
   <style>
     :root {
-        --primary-color: #2A5C82;
-        --secondary-color: #4CAF50;
-        --accent-color: #FFC107;
-        --light-bg: #F8F9FA;
+      --primary-color: #2A5C82;
+      --secondary-color: #4CAF50;
+      --accent-color: #FFC107;
+      --light-bg: #F8F9FA;
     }
     .navbar-custom {
-        background: white;
-        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-        padding: 0.8rem 1rem;
+      background: white;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      padding: 0.8rem 1rem;
     }
     .nav-link-custom {
-        color: var(--primary-color) !important;
-        font-weight: 500;
-        padding: 0.5rem 1.2rem !important;
-        margin: 0 0.3rem;
-        border-radius: 8px;
-        transition: all 0.2s ease;
+      color: var(--primary-color) !important;
+      font-weight: 500;
+      padding: 0.5rem 1.2rem;
+      margin: 0 0.3rem;
+      border-radius: 8px;
+      transition: all 0.2s ease;
     }
     .nav-link-custom:hover {
-        background: rgba(42, 92, 130, 0.08);
-        color: var(--primary-color) !important;
-        transform: translateY(-2px);
+      background: rgba(42, 92, 130, 0.08);
+      transform: translateY(-2px);
     }
     .active-link {
-        background: var(--primary-color) !important;
-        color: white !important;
-        position: relative;
-    }
-    .active-link:hover {
-        background: var(--primary-color) !important;
-    }
-    .dropdown-menu {
-        border: none;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        margin-top: 0.5rem !important;
-    }
-    .dropdown-item {
-        padding: 0.6rem 1.5rem;
-        transition: all 0.2s;
-    }
-    .dropdown-item:hover {
-        background: var(--light-bg);
-        padding-left: 1.8rem;
-    }
-    .navbar-brand {
-        color: var(--primary-color) !important;
-        font-weight: 600;
-        font-size: 1.4rem;
+      background: var(--primary-color) !important;
+      color: white !important;
     }
     .badge-notification {
-        position: absolute;
-        top: 5px;
-        right: -5px;
-        background: var(--secondary-color);
-    }
-    .profile-icon {
-        background: var(--primary-color);
-        color: white !important;
-        width: 38px;
-        height: 38px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      position: absolute;
+      top: 5px;
+      right: -5px;
+      background: var(--secondary-color);
     }
   </style>
 </head>
@@ -91,79 +64,42 @@
       <div class="collapse navbar-collapse" id="municipalNav">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link nav-link-custom active-link" href="dashboard.php">
+            <a class="nav-link nav-link-custom <?php echo ($activePage == 'dashboard') ? 'active-link' : ''; ?>" href="dashboard.php">
               <i class="bi bi-speedometer2 me-2"></i>
               Dashboard
             </a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link nav-link-custom dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-gear-wide-connected me-2"></i>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom <?php echo ($activePage == 'operations') ? 'active-link' : ''; ?>" href="operations.php">
+              <i class="bi bi-speedometer2 me-2"></i>
               Operations
             </a>
-            <ul class="dropdown-menu">
-              <li>
-                <a class="dropdown-item" href="assign-tasks.php">
-                  <i class="bi bi-person-plus me-2"></i>
-                  Assign Tasks
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="track-collection.php">
-                  <i class="bi bi-geo-alt me-2"></i>
-                  Track Collection
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="optimize-routes.php">
-                  <i class="bi bi-signpost-split me-2"></i>
-                  Optimize Routes
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav-link-custom" href="analytics.php">
+            <a class="nav-link nav-link-custom <?php echo ($activePage == 'analytics') ? 'active-link' : ''; ?>" href="analytics.php">
               <i class="bi bi-bar-chart-line me-2"></i>
               Analytics
-              <span class="badge rounded-pill bg-danger badge-notification">3</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav-link-custom" href="system-settings.php">
+            <a class="nav-link nav-link-custom <?php echo ($activePage == 'system-settings') ? 'active-link' : ''; ?>" href="system-settings.php">
               <i class="bi bi-sliders me-2"></i>
               Settings
             </a>
           </li>
-        </ul>
-        <!-- Right Side -->
-        <div class="ms-3 d-flex align-items-center">
-          <div class="dropdown">
-            <a class="profile-icon dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-person-fill"></i>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom <?php echo ($activePage == 'profile') ? 'active-link' : ''; ?>" href="profile.php">
+              <i class="bi bi-person-fill me-2"></i>
+              Profile
             </a>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li>
-                <h6 class="dropdown-header">Municipal Admin</h6>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li>
-                <a class="dropdown-item" href="profile.php">
-                  <i class="bi bi-person-circle me-2"></i>
-                  Profile
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="logout.php">
-                  <i class="bi bi-box-arrow-right me-2"></i>
-                  Logout
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
+          </li>
+          <!-- logout -->
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="logout.php">
+              <i class="bi bi-box-arrow-right me-2"></i>
+              Logout
+            </a>
+        </ul>
       </div>
     </div>
   </nav>

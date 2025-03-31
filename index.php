@@ -71,19 +71,19 @@
               <p class="text-muted">Jamnagar Municipal Corporation</p>
             </div>
             <!-- link of citizen login -->
-            <a href="Residents/index.html" style="text-decoration: none">
+            <a href="Residents/login.php" style="text-decoration: none">
               <button class="btn btn-success btn-lg w-100 mb-4">
                 Citizen Login
               </button></a
             >
             <!-- link of Municipality login -->
-            <a href="Municipal Authoritie/dashboard.html" style="text-decoration: none">
+            <a href="Municipal Authoritie/index.php" style="text-decoration: none">
               <button class="btn btn-success btn-lg w-100 mb-4">
                 Municipality Login
               </button></a
             >
             <!-- link of workers login -->
-            <a href="Workers/dashboard.html" style="text-decoration: none">
+            <a href="Workers/index.php" style="text-decoration: none">
               <button class="btn btn-success btn-lg w-100 mb-4">
                 Workers Login
               </button></a>

@@ -28,8 +28,9 @@ $stmt->close();
 $current_day = date('l');
 
 // Fetch today's waste collection schedule based on resident's address
-$stmt = $conn->prepare("SELECT time_slot, notes FROM WasteCollectionSchedules WHERE address_id = ? AND collection_day = ?");
-$stmt->bind_param("is", $address_id, $current_day);
+$stmt = $conn->prepare("SELECT time_slot, notes FROM WasteCollectionSchedules WHERE street_id = ? AND collection_day = ?");
+$stmt->bind_param("is", $street_id, $current_day);
+
 $stmt->execute();
 $stmt->store_result();
 $hasSchedule = false;

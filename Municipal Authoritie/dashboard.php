@@ -154,13 +154,19 @@ $projectedDataFinal = array_map(function ($val) {
 // ---------------------------
 // 1. Collection Completed Activity (from CollectionTasks)
 $collectionActivity = null;
-$query = "SELECT ct.scheduled_date, ct.scheduled_time, ct.remarks, w.worker_id, u.name AS worker_name, a.division
+$query = "SELECT ct.scheduled_date, ct.scheduled_time, ct.remarks, 
+                 w.worker_id, u.name AS worker_name, 
+                 CONCAT(ar.area_name, ' -> ', s.street_name, ' -> ', a.house_number) AS address_info
           FROM CollectionTasks ct
           JOIN Workers w ON ct.worker_id = w.worker_id
           JOIN Users u ON w.user_id = u.user_id
           JOIN Address a ON ct.address_id = a.address_id
+          JOIN Streets s ON a.street_id = s.street_id
+          JOIN Areas ar ON s.area_id = ar.area_id
           WHERE ct.status = 'Completed'
-          ORDER BY ct.scheduled_date DESC LIMIT 1";
+          ORDER BY ct.scheduled_date DESC 
+          LIMIT 1";
+
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -507,7 +513,7 @@ $vehicleTonnage = "2.4T";
                       </span>
                       <span class="activity-badge completed">Completed</span>
                     </div>
-                    <h6 class="activity-title">Zone <?php echo $collectionActivity['division']; ?> Collection Update</h6>
+                    <h6 class="activity-title">Collection Update at <?php echo $collectionActivity['address_info']; ?></h6>
                     <p class="activity-details">
                       Vehicle #<?php echo $collectionActivity['worker_id']; ?> collected <?php echo $currentVolume; ?>T
                       waste

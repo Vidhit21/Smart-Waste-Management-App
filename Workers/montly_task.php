@@ -46,27 +46,7 @@
     </style>
 </head>
 <body class="bg-light">
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success py-3">
-        <div class="container">
-            <a class="navbar-brand" href="dashboard.html">
-                <img src="logo.png" alt="Logo" width="40"> Waste Worker
-            </a>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="dashboard.html">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="task.html">Daily Tasks</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="monthly.html">Monthly</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php include('navbar.php'); ?>
 
     <!-- Main Content -->
     <div class="container mt-4">

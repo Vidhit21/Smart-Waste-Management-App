@@ -1,17 +1,32 @@
 CREATE DATABASE IF NOT EXISTS smart_waste_management;
 USE smart_waste_management;
 
+CREATE TABLE Areas (
+    area_id INT AUTO_INCREMENT PRIMARY KEY,
+    area_name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE Streets (
+    street_id INT AUTO_INCREMENT PRIMARY KEY,
+    area_id INT NOT NULL,
+    street_name VARCHAR(255) NOT NULL,
+    sequence_number INT NOT NULL,
+    CONSTRAINT fk_street_area FOREIGN KEY (area_id) REFERENCES Areas(area_id),
+    CONSTRAINT unique_area_street UNIQUE (area_id, street_name)
+);
 --  1. Core Tables: Address and Users
 
 --  Address table holds detailed location info.
 CREATE TABLE Address (
     address_id INT AUTO_INCREMENT PRIMARY KEY,
-    division VARCHAR(100),
-    street VARCHAR(255),
+    street_id INT NOT NULL,
+    house_number VARCHAR(50),  -- e.g., house number or building name
     pincode VARCHAR(10),
     latitude DECIMAL(10,8),
-    longitude DECIMAL(11,8)
+    longitude DECIMAL(11,8),
+    CONSTRAINT fk_address_street FOREIGN KEY (street_id) REFERENCES Streets(street_id)
 );
+
 
 -- Users table stores common authentication and profile info.
 CREATE TABLE Users (
@@ -69,11 +84,11 @@ CREATE TABLE Agencies (
 -- Waste Collection Schedule by area (linked to Address).
 CREATE TABLE WasteCollectionSchedules (
     schedule_id INT AUTO_INCREMENT PRIMARY KEY,
-    address_id INT,
-    collection_day ENUM('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'),
-    time_slot TIME,
+    street_id INT NOT NULL,
+    collection_day ENUM('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday') NOT NULL,
+    time_slot TIME NOT NULL,
     notes TEXT,
-    CONSTRAINT fk_schedule_address FOREIGN KEY (address_id) REFERENCES Address(address_id)
+    CONSTRAINT fk_schedule_street FOREIGN KEY (street_id) REFERENCES Streets(street_id)
 );
 
 -- Reports table for residents reporting issues.
@@ -226,3 +241,5 @@ CREATE TABLE WasteCollectionRoute (
     optimized_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_route_worker FOREIGN KEY (worker_id) REFERENCES Workers(worker_id)
 );
+
+

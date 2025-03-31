@@ -4,65 +4,53 @@ require_once 'db_connection.php';
 
 // --- Registration Code ---
 if (isset($_POST['register'])) {
-    // Retrieve form values
-    $username = $_POST['username'];
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
+    // Retrieve form values for user details
+    $username = trim($_POST['username']);
+    $name     = trim($_POST['name']);
+    $email    = trim($_POST['email']);
+    $phone    = trim($_POST['phone']);
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
-    $department = $_POST['department'];
+    $department = trim($_POST['department']);
 
-    // Address details
-    $division = $_POST['division'];
-    $street = $_POST['street'];
-    $pincode = $_POST['pincode'];
-    $latitude = $_POST['latitude'];
-    $longitude = $_POST['longitude'];
-
-    // Check passwords match
+    // Check if passwords match
     if ($password !== $confirm_password) {
         $error = "Passwords do not match.";
     } else {
         // Hash the password
         $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
-        // Insert address information
-        $stmt = $conn->prepare("INSERT INTO Address (division, street, pincode, latitude, longitude) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssdd", $division, $street, $pincode, $latitude, $longitude);
+        // Municipal authorities do not need an address.
+        // Set address_id to NULL.
+        $address_id = NULL;
+        $user_type = 'Authority';
+
+        // Insert user details into Users table.
+        $stmt = $conn->prepare("INSERT INTO Users (username, name, email, phone, password_hash, user_type, address_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        // 'address_id' is bound as an integer; if NULL is passed, it will be stored as NULL.
+        $stmt->bind_param("ssssssi", $username, $name, $email, $phone, $password_hash, $user_type, $address_id);
         if (!$stmt->execute()) {
-            $error = "Error inserting address: " . $stmt->error;
+            $error = "Error inserting user: " . $stmt->error;
         } else {
-            $address_id = $stmt->insert_id;
+            $user_id = $stmt->insert_id;
             $stmt->close();
 
-            // Insert user details with user_type set to 'Authority'
-            $user_type = 'Authority';
-            $stmt = $conn->prepare("INSERT INTO Users (username, name, email, phone, password_hash, user_type, address_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssssi", $username, $name, $email, $phone, $password_hash, $user_type, $address_id);
+            // Insert authority-specific details into Authorities table.
+            $stmt = $conn->prepare("INSERT INTO Authorities (user_id, department) VALUES (?, ?)");
+            $stmt->bind_param("is", $user_id, $department);
             if (!$stmt->execute()) {
-                $error = "Error inserting user: " . $stmt->error;
+                $error = "Error inserting authority details: " . $stmt->error;
             } else {
-                $user_id = $stmt->insert_id;
-                $stmt->close();
-
-                // Insert authority-specific details
-                $stmt = $conn->prepare("INSERT INTO Authorities (user_id, department) VALUES (?, ?)");
-                $stmt->bind_param("is", $user_id, $department);
-                if (!$stmt->execute()) {
-                    $error = "Error inserting authority details: " . $stmt->error;
-                } else {
-                    $success = "Registration successful. You can now login.";
-                }
-                $stmt->close();
+                $success = "Registration successful. You can now login.";
             }
+            $stmt->close();
         }
     }
 }
 
 // --- Login Code ---
 if (isset($_POST['login'])) {
-    $login_username = $_POST['login_username'];
+    $login_username = trim($_POST['login_username']);
     $login_password = $_POST['login_password'];
 
     $stmt = $conn->prepare("SELECT user_id, password_hash, user_type FROM Users WHERE username = ?");
@@ -97,6 +85,8 @@ if (isset($_POST['login'])) {
 <head>
     <meta charset="UTF-8">
     <title>Municipal Authority Login & Registration</title>
+    <link rel="stylesheet" href="css/index.css">
+    <!-- You can include Bootstrap or custom styles as needed -->
 </head>
 <body>
     <!-- Municipal Authority Login Form -->
@@ -146,23 +136,6 @@ if (isset($_POST['login'])) {
         <br>
         <label for="department">Department:</label>
         <input type="text" name="department" required>
-        <br>
-
-        <h3>Address Information</h3>
-        <label for="division">Division:</label>
-        <input type="text" name="division" required>
-        <br>
-        <label for="street">Street:</label>
-        <input type="text" name="street" required>
-        <br>
-        <label for="pincode">Pincode:</label>
-        <input type="text" name="pincode" required>
-        <br>
-        <label for="latitude">Latitude:</label>
-        <input type="text" name="latitude" required>
-        <br>
-        <label for="longitude">Longitude:</label>
-        <input type="text" name="longitude" required>
         <br>
         <input type="submit" name="register" value="Register">
     </form>

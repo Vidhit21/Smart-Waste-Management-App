@@ -16,69 +16,7 @@
     <link rel="stylesheet" href="css/nav.css">
   </head>
   <body class="bg-light">
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success py-3">
-      <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="dashboard.html">
-          <img src="logo.png" alt="Logo" width="40" class="me-2" />
-          Waste Worker Portal
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#mainNav"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="mainNav">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" href="dashboard.html">
-                <i class="bi bi-speedometer2 me-1"></i>Dashboard
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="task.html">
-                <i class="bi bi-list-task me-1"></i>Tasks
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="routes.html">
-                <i class="bi bi-geo-alt me-1"></i>Routes
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="report.html">
-                <i class="bi bi-clipboard-check me-1"></i>Report
-              </a>
-            </li>
-            <li class="nav-item dropdown ms-lg-3">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                data-bs-toggle="dropdown"
-              >
-                <i class="bi bi-person-circle me-1"></i>John Doe
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li>
-                  <a class="dropdown-item" href="profile.html">
-                    <i class="bi bi-person me-2"></i>Profile
-                  </a>
-                </li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item text-danger" href="login.html">
-                    <i class="bi bi-box-arrow-right me-2"></i>Logout
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <?php include('navbar.php'); ?>
 
     <!-- Dashboard Content -->
     <div class="container mt-4">
